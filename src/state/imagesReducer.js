@@ -1,25 +1,25 @@
 const initialState = {
-  users: [],
-  filterUsers: [],
+  images: [],
+  filterImages: [],
   pageSize: 50,
-  totalUsersCount: 0,
+  totalImagesCount: 0,
   currentPage: 1,
   sortField: "id",
   sortType: "▲",
 };
 
-export const usersReducer = (state = initialState, action) => {
+export const imagesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "set_users": {
+    case "set_images": {
       return {
         ...state,
-        users: action.users.items,
-        filterUsers: action.users.items,
-        totalUsersCount: action.users.totalCount,
+        images: action.images.results,
+        filterImages: action.images.results,
+        totalImagesCount: action.images.result_count,
       };
     }
-    case "set_filterUsers": {
-      return { ...state, filterUsers: action.filterUsers };
+    case "set_filterImages": {
+      return { ...state, filterImages: action.filterImages };
     }
     case "set_sortField": {
       return { ...state, sortField: action.sortField };

@@ -2,15 +2,15 @@ import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { sortValues } from "./shared/sortValues";
-import { setFilterUsers, setSortField, setSortType } from "./state/actions";
+import { setFilterImages, setSortField, setSortType } from "./state/actions";
 import {
   getPageSize,
-  getTotalUsersCount,
+  getTotalImagesCount,
   getSortType,
   getSortField,
-  getFilterUsers,
+  getFilterImages,
 } from "./state/selectors";
-import { getUsers } from "./state/thunk";
+import { getImages } from "./state/thunk";
 import { TableSearch } from "./TableSearch";
 
 const StyledClientPagination = styled.div`
@@ -37,28 +37,29 @@ const StyledClientPagination = styled.div`
 
 export const ClientPagination = () => {
   const dispatch = useDispatch();
-  const filterUsers = useSelector(getFilterUsers);
+  const filterImages = useSelector(getFilterImages);
   const pageSize = useSelector(getPageSize);
-  const totalUsersCount = useSelector(getTotalUsersCount);
+  const totalImagesCount = useSelector(getTotalImagesCount);
   const sortField = useSelector(getSortField);
   const sortType = useSelector(getSortType);
-  const totalPages = Math.ceil(totalUsersCount / pageSize);
+  const totalPages = Math.ceil(totalImagesCount / pageSize);
 
   const handlePageClick = ({ selected }) => {
-    dispatch(getUsers(selected + 1));
+    dispatch(getImages(selected + 1));
     dispatch(setSortField("id"));
     dispatch(setSortType("▲"));
   };
 
   const onSort = (e) => {
     const id = e.target.id;
+    console.log(id);
     dispatch(setSortType(sortType === "▲" ? "▼" : "▲"));
     dispatch(setSortField(id));
-    sortValues(id, filterUsers, sortType);
+    sortValues(id, filterImages, sortType);
   };
 
-  const searchValue = (updateUsers) => {
-    dispatch(setFilterUsers(updateUsers));
+  const searchValue = (updateImages) => {
+    dispatch(setFilterImages(updateImages));
   };
 
   return (
@@ -68,23 +69,23 @@ export const ClientPagination = () => {
         <thead>
           <tr onClick={(e) => onSort(e)}>
             <th id="id">ID {sortField === "id" ? sortType : null}</th>
-            <th id="name">Name {sortField === "name" ? sortType : null}</th>
-            <th id="uniqueUrlName">
-              URL Name {sortField === "uniqueUrlName" ? sortType : null}
+            <th id="title">Title {sortField === "title" ? sortType : null}</th>
+            <th id="creator">
+              Creator {sortField === "creator" ? sortType : null}
             </th>
-            <th id="photos">
-              Photos {sortField === "photos" ? sortType : null}
+            <th id="source">
+              Source {sortField === "source" ? sortType : null}
             </th>
           </tr>
         </thead>
         <tbody>
-          {filterUsers &&
-            filterUsers.map((user) => (
-              <tr key={user.id}>
-                <td>{user.id}</td>
-                <td>{user.name}</td>
-                <td>{user.uniqueUrlName ? user.uniqueUrlName : "Нет"}</td>
-                <td>{user.photos.small ? user.photos.small : "Нет"}</td>
+          {filterImages &&
+            filterImages.map((image) => (
+              <tr key={image.id}>
+                <td>{image.id}</td>
+                <td>{image.title}</td>
+                <td>{image.creator}</td>
+                <td>{image.source}</td>
               </tr>
             ))}
         </tbody>

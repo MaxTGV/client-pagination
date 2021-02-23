@@ -1,11 +1,11 @@
-export const setUsers = (users) => ({
-  type: "set_users",
-  users,
+export const setImages = (images) => ({
+  type: "set_images",
+  images,
 });
 
-export const setFilterUsers = (filterUsers) => ({
-  type: "set_filterUsers",
-  filterUsers,
+export const setFilterImages = (filterImages) => ({
+  type: "set_filterImages",
+  filterImages,
 });
 
 export const setSortField = (sortField) => ({

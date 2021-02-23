@@ -1,5 +1,5 @@
-export const fetchUsers = (page, limit = 50) => {
+export const fetchImages = (page, limit = 50) => {
   return fetch(
-    `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${limit}`
+    `https://api.creativecommons.engineering/v1/images?page=${page}&page_size=${limit}`
   ).then((res) => res.json());
 };

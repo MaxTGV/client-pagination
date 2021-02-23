@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { getUsersCount } from "./state/selectors";
+import { getImagesCount } from "./state/selectors";
 
 const StyledTableSearch = styled.div`
   margin: 20px auto;
@@ -30,17 +30,17 @@ const StyledTableSearch = styled.div`
 `;
 
 export const TableSearch = ({ searchValue }) => {
-  const users = useSelector(getUsersCount);
+  const images = useSelector(getImagesCount);
 
   const onChange = (e) => {
     const value = e.target.value;
     if (value.length === 0) {
-      searchValue(users);
+      searchValue(images);
     }
-    const updateUsers = users.filter(
-      (user) => user.name.toLowerCase().indexOf(value) > -1
+    const updateImages = images.filter(
+      (image) => image.title.toLowerCase().indexOf(value) > -1
     );
-    searchValue(updateUsers);
+    searchValue(updateImages);
   };
 
   return (

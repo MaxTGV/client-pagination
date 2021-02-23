@@ -2,7 +2,7 @@ import React from "react";
 import { ClientPagination } from "./ClientPagination";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "./state/thunk";
+import { getImages } from "./state/thunk";
 import { getCurrentPage, getPageSize } from "./state/selectors";
 
 export const App = () => {
@@ -11,7 +11,7 @@ export const App = () => {
   const currentPage = useSelector(getCurrentPage);
 
   useEffect(() => {
-    dispatch(getUsers(currentPage, pageSize));
+    dispatch(getImages(currentPage, pageSize));
   }, [dispatch, currentPage, pageSize]);
 
   return <ClientPagination />;

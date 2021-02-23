@@ -1,10 +1,8 @@
-import { fetchUsers } from "../api";
-import { setUsers } from "./actions";
+import { fetchImages } from "../api";
+import { setImages } from "./actions";
 
-export const getUsers = (page, limit) => {
+export const getImages = (page, limit) => {
   return (dispatch) => {
-    fetchUsers(page, limit).then((users) =>
-      dispatch(setUsers(users))
-    );
+    fetchImages(page, limit).then((images) => dispatch(setImages(images)));
   };
 };
